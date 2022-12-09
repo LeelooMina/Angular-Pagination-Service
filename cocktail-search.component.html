@@ -1,0 +1,96 @@
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
+<div class="container bootstrap snippets">
+  <hr>
+  <ol class="breadcrumb">
+    <li>Page name</li>
+    <li>/</li>
+    <li>Search Results</li>
+  </ol>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="well search-result">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" [(ngModel)]="ingredientInput">
+          <span class="input-group-btn">
+            <button class="btn search-button btn-lg" type="button" (click)="onClick()">
+
+              Search
+            </button>
+          </span>
+        </div>
+      </div>
+
+
+
+      <div *ngIf="cocktailListShow.length != 0">
+        <div class="row card-group">
+          <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-3" style="text-align: center"
+          *ngFor="let cocktail of cocktailListShow; let i = index">
+            <div class="cocktail search-result m-4">
+
+              <div (click)="cocktailDetails(cocktail.idDrink)">
+
+                <img class="img-responsive" src="{{cocktail.strDrinkThumb}}/preview" alt="">
+              </div>
+
+
+                <h5>{{cocktail.strDrink}}</h5>
+
+
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showPages.length != 0">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" *ngIf="currentPage != 1">
+
+        <a class="page-link" aria-label="Previous"
+        (click)="nextPage(false)">
+          <span aria-hidden="true">&laquo;</span>
+
+        </a>
+      </li>
+      <li *ngFor="let page of showPages" class="page-item">
+        <a class="page-link" [class.active]="page===currentPage" (click)="pageChange(page)">{{page}}</a>
+      </li>
+
+      <li class="page-item"  *ngIf="currentPage != pageAmt">
+        <a class="page-link" aria-label="Next"
+        (click)="nextPage(true)">
+
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">{{singleCocktail.strDrink}}</h4>
+      </div>
+      <div class="modal-body">
+        <p>{{singleCocktail.strInstructions}}</p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="closePopup()">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
