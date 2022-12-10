@@ -7,13 +7,6 @@ export class PaginationService {
   constructor() {}
 
 
-  onNext(current: number) {
-    return current++;
-  }
-
-  onPrevious(current: number) {
-    return current--;
-  }
 
   onPageNumber(pageNumber: number) {}
 
@@ -55,8 +48,9 @@ export class PaginationService {
 
       }
       else if(endPage){
-        showPages.push(current);
         showPages.push(current-1);
+        showPages.push(current);
+        
       }
 
       return showPages;
